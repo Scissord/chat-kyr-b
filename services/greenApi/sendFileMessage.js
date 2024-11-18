@@ -8,6 +8,8 @@ export default async function sendFileMessage(user_id, customer, file, customer_
   const instance = await Instance.findByBuyerPhone(customer.buyer_phone);
   const url = process.env.URL + 'uploads/' + file.filename;
 
+  console.log(file);
+
   const res = await axios({
     url: `${process.env.GREEN_API_URL}/waInstance${instance.instance_id}/sendFileByUrl/${instance.api_token}`,
     method: 'POST',
