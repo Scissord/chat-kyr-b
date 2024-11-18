@@ -15,7 +15,7 @@ export default async function getOrder(order_id, text, user_id, status, phone) {
   if(!customer) {
     const res = await axios({
       method: 'GET',
-      url: `https://call-center1.leadvertex.ru/api/admin/getOrdersByIds.html?token=${process.env.LEADVERTEX_API_KEY}&ids=${order_id}`,
+      url: `https://callcenter-kyrgyzstan.leadvertex.ru/api/admin/getOrdersByIds.html?token=${process.env.LEADVERTEX_API_KEY}&ids=${order_id}`,
     })
 
     if(res.status === 200) {
