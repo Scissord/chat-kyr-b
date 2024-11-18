@@ -1,6 +1,7 @@
 import multer from "multer";
 import path from "path";
 import fs from 'fs';
+import { slugify as transliteration } from "transliteration";
 
 // Функция для создания конфигурации хранилища для multer
 export default function getMulterStorage() {
@@ -15,10 +16,15 @@ export default function getMulterStorage() {
       cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
-      const currentTime = new Date().toISOString().replace(/[-:.]/g, '');
+      const currentTime = new Date().toISOString().replace(/[-:.]/g, "");
       const originalName = path.basename(file.originalname, path.extname(file.originalname));
-      const uniqueSuffix = `${originalName}-${currentTime}${path.extname(file.originalname)}`;
+
+      // Транслитерация имени файла
+      const sanitizedOriginalName = transliteration(originalName);
+
+      // Создание уникального имени
+      const uniqueSuffix = `${sanitizedOriginalName}-${currentTime}${path.extname(file.originalname)}`;
       cb(null, uniqueSuffix);
-    }
+    },
   });
 }

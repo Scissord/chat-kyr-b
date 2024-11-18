@@ -29,6 +29,7 @@
     "pg": "^8.12.0",
     "redis": "^4.7.0",
     "sqlite3": "^5.1.7",
+    "transliteration": "^2.3.5",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
