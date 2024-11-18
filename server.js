@@ -8,7 +8,7 @@ import apiRoutes from './routes/index.js';
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://api.tc-chat-kyr.pw',
+  'https://tc-chat-kyr.pw',
 ];
 
 const app = express();
