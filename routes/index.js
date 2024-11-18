@@ -23,4 +23,9 @@ router.use('/download', downloadRoutes);
 router.use('/users', userRoutes);
 router.use('/uploads', express.static('uploads'));
 
+router.get('/check', (req, res) => {
+  console.log('routes working');
+  res.send('Check route working');
+});
+
 export default router;
