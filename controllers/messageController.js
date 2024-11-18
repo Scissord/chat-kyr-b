@@ -92,7 +92,7 @@ export const cache = async (req, res) => {
     const message = req.body[0];
     const customer_id = req.body.customer_id.toString();
 
-    console.log(message);
+    console.log(req.body);
 
     let messages = await redisClient.get(customer_id);
 
