@@ -102,7 +102,7 @@ export const cache = async (req, res) => {
       const messagesFromDm = await Message.getChat(message.customer_id);
       messages = messagesFromDm.map((message) => ({
         ...message,
-        created_at: formatDate(message.created_at)
+        created_at: formatDate(message.last_message_date)
       }));
     };
 
