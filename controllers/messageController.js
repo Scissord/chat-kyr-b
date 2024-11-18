@@ -89,19 +89,21 @@ export const leadvertexCreate = async (req, res) => {
 
 export const cache = async (req, res) => {
   try {
-    const message = req.body;
-    const customer_id = req.body.customer_id.toString();
+    const message = req.body[0];
+    const customer_id = req.body[0].id.toString();
 
     let messages = await redisClient.get(customer_id);
 
     if(messages && messages.length > 0) {
       messages = JSON.parse(messages);
-      message.created_at = formatDate(message.created_at)
+      message.customer_id = customer_id;
+      message.created_at = formatDate(message.last_message_date)
       messages.push(message);
     } else {
-      const messagesFromDm = await Message.getChat(message.customer_id);
+      const messagesFromDm = await Message.getChat(customer_id);
       messages = messagesFromDm.map((message) => ({
         ...message,
+        customer_id,
         created_at: formatDate(message.last_message_date)
       }));
     };
