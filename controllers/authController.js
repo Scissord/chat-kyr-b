@@ -5,6 +5,7 @@ import * as Role from "../models/role.js";
 import generateTokens from '../helpers/generateTokens.js';
 
 export const login = async (req, res) => {
+  console.log('authController.login');
 	try {
 		const { name, password } = req.body;
 
