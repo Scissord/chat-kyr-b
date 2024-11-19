@@ -7,6 +7,7 @@ import randomInstance from '../instance/randomInstance.js';
 
 export default async function sendTextMessage(user_id, customer, message, customer_id) {
   let instance = await Instance.findByBuyerPhone(customer.buyer_phone);
+
   if (!instance) {
     const { randomBuyerPhone, randomInstanceId, randomApiToken } = await randomInstance();
     instance = {
@@ -16,9 +17,11 @@ export default async function sendTextMessage(user_id, customer, message, custom
     };
 
     await Customer.update(customer_id, {
-      buyer_phone: randomBuyerPhone
+      buyer_phone: randomBuyerPhone,
     });
   }
+
+  // забаненый тогда брать рандомный
 
   const res = await axios({
     url: `${process.env.GREEN_API_URL}/waInstance${instance.instance_id}/sendMessage/${instance.api_token}`,
@@ -31,8 +34,6 @@ export default async function sendTextMessage(user_id, customer, message, custom
       message: message
     },
   })
-
-  console.log(res.data);
 
   let obj = null;
   if(res.status === 200) {
