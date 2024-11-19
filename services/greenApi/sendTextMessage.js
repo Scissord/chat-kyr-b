@@ -48,5 +48,7 @@ export default async function sendTextMessage(user_id, customer, message, custom
   const manager = await User.find(user_id);
   obj.manager_name = manager.name;
 
+  await Customer.update(customer_id, { manager_id: user_id });
+
   return obj;
 };

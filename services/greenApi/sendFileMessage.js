@@ -58,5 +58,7 @@ export default async function sendFileMessage(user_id, customer, file, customer_
   const manager = await User.find(user_id);
   obj.manager_name = manager.name;
 
+  await Customer.update(customer_id, { manager_id: user_id });
+
   return obj;
 };
