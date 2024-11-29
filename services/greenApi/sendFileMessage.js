@@ -6,7 +6,7 @@ import * as User from '../../models/user.js';
 import * as Customer from '../../models/customer.js';
 import randomInstance from '../instance/randomInstance.js';
 
-export default async function sendFileMessage(user_id, customer, file, customer_id) {
+export default async function sendFileMessage(user_id, customer, file, customer_id, status) {
   let instance = await Instance.findByBuyerPhone(customer.buyer_phone);
   if (!instance) {
     const { randomBuyerPhone, randomInstanceId, randomApiToken } = await randomInstance();
@@ -58,7 +58,7 @@ export default async function sendFileMessage(user_id, customer, file, customer_
   const manager = await User.find(user_id);
   obj.manager_name = manager.name;
 
-  await Customer.update(customer_id, { manager_id: user_id });
+  await Customer.update(customer_id, { manager_id: user_id, status });
 
   return obj;
 };

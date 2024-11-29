@@ -53,11 +53,11 @@ export const create = async (req, res) => {
     let obj = null;
 
     if(type === 'textMessage') {
-      obj = await sendTextMessage(req.user.id, customer, message, customer_id);
+      obj = await sendTextMessage(req.user.id, customer, message, customer_id, req.user.role.status);
     };
 
     if(type === 'fileMessage') {
-      obj = await sendFileMessage(req.user.id, customer, file, customer_id);
+      obj = await sendFileMessage(req.user.id, customer, file, customer_id, req.user.role.status);
     };
 
     let messages = await redisClient.get(customer_id);

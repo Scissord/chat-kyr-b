@@ -19,7 +19,6 @@ export default async function getOrder(order_id, text, user_id, status, phone) {
     })
 
     if(res.status === 200) {
-
       console.log(res.data);
 
       const order = res.data[order_id];
@@ -48,9 +47,7 @@ export default async function getOrder(order_id, text, user_id, status, phone) {
     })
   };
 
-  console.log("getOrder", customer);
-
-  const message = await sendTextMessage(user_id, customer, text, customer.id);
+  const message = await sendTextMessage(user_id, customer, text, customer.id, status);
   await updateAvatar(customer);
 
   let messages = await redisClient.get(customer.id);
