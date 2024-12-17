@@ -1,10 +1,10 @@
 import multer from "multer";
 import path from "path";
-import fs from "fs";
+import fs from 'fs';
 import { slugify as transliteration } from "transliteration";
 
 export default function getMulterStorage() {
-  const storage = multer.diskStorage({
+  return multer.diskStorage({
     destination: (req, file, cb) => {
       const uploadPath = path.resolve('./uploads');
 
@@ -22,13 +22,6 @@ export default function getMulterStorage() {
 
       const uniqueSuffix = `${sanitizedOriginalName}-${currentTime}${path.extname(file.originalname)}`;
       cb(null, uniqueSuffix);
-    },
-  });
-
-  return multer({
-    storage,
-    limits: {
-      fileSize: 10 * 1024 * 1024, // 10 MB
     },
   });
 }
