@@ -55,10 +55,10 @@ export default async function sendFileMessage(user_id, customer, file, customer_
     obj.attachments = [attachment]
   };
 
-  const manager = await User.find(user_id);
-  obj.manager_name = manager.name;
+  // const manager = await User.find(user_id);
+  // obj.manager_name = manager.name;
 
-  await Customer.update(customer_id, { manager_id: user_id, status });
+  // await Customer.update(customer_id, { manager_id: user_id, status });
 
   return obj;
 };
