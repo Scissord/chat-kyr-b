@@ -34,6 +34,8 @@ export default async function sendTextMessage(user_id, customer, message, custom
     },
   })
 
+  console.log(res);
+
   let obj = null;
   if(res.status === 200) {
     obj = await Message.create({
