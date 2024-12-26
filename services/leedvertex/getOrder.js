@@ -46,15 +46,25 @@ export default async function getOrder(order_id, text, user_id, status, phone) {
   };
 
   const message = await sendTextMessage(user_id, customer, text, customer.id, status);
-  console.log('here');
   await updateAvatar(customer);
 
+  console.log('here1');
+
   let messages = await redisClient.get(customer.id);
+
+  console.log('here2');
+
   messages = messages ? JSON.parse(messages) : [];
+
+  console.log('here3');
 
   messages.push(message);
 
+  console.log('here4');
+
   await redisClient.setEx(customer.id, 3600, JSON.stringify(messages));
+
+  console.log('here5');
 
   return customer
 };
