@@ -17,10 +17,11 @@ export default async function getOrder(order_id, text, user_id, status, phone) {
       method: 'GET',
       url: `https://callcenter-kyrgyzstan.leadvertex.ru/api/admin/getOrdersByIds.html?token=${process.env.LEADVERTEX_API_KEY}&ids=${order_id}`,
     })
+    
+    console.log('res.data', res.data);
+    console.log('res.status', res.status);
 
     if(res.status === 200) {
-      console.log(res.data);
-
       const order = res.data[order_id];
 
       const goodKeys = Object.keys(order.goods);
