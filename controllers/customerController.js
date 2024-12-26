@@ -13,8 +13,6 @@ export const get = async (req, res) => {
       customers = await Customer.get(limit, page, search, role.status, id);
     }
 
-    console.log(customers)
-
     if(+role.status === 10) {
       const phone = findBuyerPhone(+id);
       customers = await Customer.getForBuyers(limit, page, search, phone);
