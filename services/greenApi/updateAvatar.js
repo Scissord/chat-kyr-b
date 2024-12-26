@@ -5,7 +5,9 @@ import randomInstance from '../instance/randomInstance.js';
 
 export default async function updateAvatar(customer) {
   console.log('start updateAvatar')
+  console.log(customer);
   let instance = await Instance.findByBuyerPhone(customer.buyer_phone);
+  console.log("instance", instance)
   if (!instance) {
     const { randomBuyerPhone, randomInstanceId, randomApiToken } = await randomInstance();
     instance = {
@@ -29,6 +31,9 @@ export default async function updateAvatar(customer) {
       chatId: customer.phone,
     },
   })
+
+  console.log("res.status", res.status);
+  console.log("res.data", res.data);
 
   if(res.status === 200 && res.data.available === true) {
     await Customer.update(customer.id, {
