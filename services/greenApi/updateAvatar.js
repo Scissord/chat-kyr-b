@@ -21,19 +21,26 @@ export default async function updateAvatar(customer) {
     });
   };
 
-  const res = await axios({
-    url: `${process.env.GREEN_API_URL}/waInstance${instance.instance_id}/getAvatar/${instance.api_token}`,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: {
-      chatId: customer.phone,
-    },
-  })
+  let res = null;
+  try {
+    res = await axios({
+      url: `${process.env.GREEN_API_URL}/waInstance${instance.instance_id}/getAvatar/${instance.api_token}`,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        chatId: customer.phone,
+      },
+    })
 
-  console.log("res.status", res.status);
-  console.log("res.data", res.data);
+    console.log("res.status", res.status);
+    console.log("res.data", res.data);
+  } catch (err) {
+    console.log("err", err);
+    console.log("err.response", err.response)
+    console.log("err.response.data", err.response.data)
+  }
 
   if(res.status === 200 && res.data.available === true) {
     await Customer.update(customer.id, {
