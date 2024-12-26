@@ -4,6 +4,7 @@ import * as Instance from '../../models/instance.js';
 import randomInstance from '../instance/randomInstance.js';
 
 export default async function updateAvatar(customer) {
+  console.log('start updateAvatar')
   let instance = await Instance.findByBuyerPhone(customer.buyer_phone);
   if (!instance) {
     const { randomBuyerPhone, randomInstanceId, randomApiToken } = await randomInstance();
@@ -35,5 +36,6 @@ export default async function updateAvatar(customer) {
     });
   };
 
+  console.log('end updateAvatar')
   return;
 };
