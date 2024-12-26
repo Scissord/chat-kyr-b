@@ -21,7 +21,6 @@ export default async function sendTextMessage(user_id, customer, message, custom
     });
   }
 
-
   const res = await axios({
     url: `${process.env.GREEN_API_URL}/waInstance${instance.instance_id}/sendMessage/${instance.api_token}`,
     method: 'POST',
@@ -33,8 +32,6 @@ export default async function sendTextMessage(user_id, customer, message, custom
       message: message
     },
   })
-
-  console.log(res);
 
   let obj = null;
   if(res.status === 200) {

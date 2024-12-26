@@ -17,8 +17,6 @@ export default async function getOrder(order_id, text, user_id, status, phone) {
       method: 'GET',
       url: `https://callcenter-kyrgyzstan.leadvertex.ru/api/admin/getOrdersByIds.html?token=${process.env.LEADVERTEX_API_KEY}&ids=${order_id}`,
     })
-    
-    console.log('here');
 
     if(res.status === 200) {
       const order = res.data[order_id];
@@ -48,6 +46,7 @@ export default async function getOrder(order_id, text, user_id, status, phone) {
   };
 
   const message = await sendTextMessage(user_id, customer, text, customer.id, status);
+  console.log('here');
   await updateAvatar(customer);
 
   let messages = await redisClient.get(customer.id);

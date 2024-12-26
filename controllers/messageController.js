@@ -76,6 +76,7 @@ export const create = async (req, res) => {
 
 export const leadvertexCreate = async (req, res) => {
   try {
+    console.log('here');
     const { leadvertex_id, phone, message } = req.body;
 
     const customer = await getOrder(leadvertex_id, message, req.user.id, req.user.role.status, phone);
