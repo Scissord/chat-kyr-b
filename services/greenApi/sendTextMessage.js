@@ -34,7 +34,7 @@ export default async function sendTextMessage(user_id, customer, message, custom
   })
 
   let obj = null;
-  if(res.status === 200) {
+  if (res.status === 200) {
     obj = await Message.create({
       user_id,
       customer_id,
@@ -47,7 +47,7 @@ export default async function sendTextMessage(user_id, customer, message, custom
   obj.manager_name = manager.name;
 
   // should update status here
-  await Customer.update(customer_id, { manager_id: user_id, status });
+  // await Customer.update(customer_id, { manager_id: user_id, status });
 
   return obj;
 };

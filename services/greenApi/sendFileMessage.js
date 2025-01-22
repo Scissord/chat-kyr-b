@@ -37,7 +37,7 @@ export default async function sendFileMessage(user_id, customer, file, customer_
 
   let obj = null;
 
-  if(res.status === 200) {
+  if (res.status === 200) {
     obj = await Message.create({
       user_id,
       customer_id,
@@ -55,8 +55,8 @@ export default async function sendFileMessage(user_id, customer, file, customer_
     obj.attachments = [attachment]
   };
 
-  // const manager = await User.find(user_id);
-  // obj.manager_name = manager.name;
+  const manager = await User.find(user_id);
+  obj.manager_name = manager.name;
 
   // await Customer.update(customer_id, { manager_id: user_id, status });
 
