@@ -12,6 +12,10 @@ import userRoutes from './userRoute.js';
 
 const router = Router();
 
+router.get('/check', (req, res) => {
+  console.log('routes working');
+  res.send('Check route working');
+});
 router.use('/auth', authRoutes);
 router.use('/board', boardRoutes);
 router.use('/cards', cardRoutes);
@@ -21,11 +25,7 @@ router.use('/messages', messageRoutes);
 router.use('/admin', adminRoutes);
 router.use('/download', downloadRoutes);
 router.use('/users', userRoutes);
+router.use('/templates', express.static('templates'));
 router.use('/uploads', express.static('uploads'));
-
-router.get('/check', (req, res) => {
-  console.log('routes working');
-  res.send('Check route working');
-});
 
 export default router;
