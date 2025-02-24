@@ -21,5 +21,6 @@ router.post("/sync/:customer_id", protectRoute, controller.sync);
 router.post("/reply", protectRoute, controller.reply);
 // Занести в кэш
 router.post("/cache", controller.cache);
-
+// Отправить шаблон
+router.post("/template", protectRoute, controller.template);
 export default router;

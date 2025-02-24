@@ -5,11 +5,13 @@ import * as Instance from "../models/instance.js";
 import redisClient from '../services/redis/redis.js';
 import sendTextMessage from '../services/greenApi/sendTextMessage.js';
 import sendFileMessage from '../services/greenApi/sendFileMessage.js';
+import sendTemplateMessage from '../services/greenApi/sendTemplateMessage.js';
 import replyFile from '../services/greenApi/replyFile.js';
 import replyLocation from "../services/greenApi/replyLocation.js";
 import getOrder from "../services/leedvertex/getOrder.js";
 import formatDate from "../helpers/formatDate.js";
 import updateChat from "../services/greenApi/updateChat.js";
+import findTemplate from "../services/template/find.js";
 
 export const get = async (req, res) => {
 	try {
@@ -184,4 +186,29 @@ export const sync = async (req, res) => {
 		console.log("Error in sync message controller", err.message);
 		res.status(500).send({ error: "Internal Server Error" });
 	}
+};
+
+export const template = async (req, res) => {
+  try {
+    const { customer_id, product, type, i } = req.body;
+
+    const file = await findTemplate(product, type, i);
+    if (!file) return res.status(400).send({ message: 'No file' });
+    const customer = await Customer.find(customer_id);
+    if (!customer) return res.status(400).send({ message: 'No customer' });
+
+    const obj = await sendTemplateMessage(req.user.id, customer, file, customer_id, product);
+
+    let messages = await redisClient.get(customer_id);
+    messages = messages ? JSON.parse(messages) : [];
+
+    messages.push(obj);
+
+    await redisClient.setEx(customer_id, 3600, JSON.stringify(messages));
+
+    res.status(200).send({ message: obj });
+  } catch (err) {
+    console.log("Error in template message controller", err.message);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
 };

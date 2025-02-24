@@ -2,7 +2,6 @@ import * as Message from '../../models/message.js';
 import * as Attachment from '../../models/attachment.js';
 
 export const locationMessage = async (customer_id, message) => {
-  console.log('locationMessage')
   const incoming = message.type === 'incoming' ? true : false;
   const user_name = message.senderName;
   const created_at = new Date(message.timestamp * 1000);
@@ -32,7 +31,6 @@ export const locationMessage = async (customer_id, message) => {
 };
 
 export const textMessage = async (customer_id, message) => {
-  console.log('textMessage')
   const incoming = message.type === 'incoming' ? true : false;
   const text = message.textMessage;
   const user_name = message.senderName;
@@ -51,7 +49,6 @@ export const textMessage = async (customer_id, message) => {
 };
 
 export const imageMessage = async (customer_id, message) => {
-  console.log('imageMessage')
   const incoming = message.type === 'incoming' ? true : false;
   const user_name = message.senderName;
   const created_at = new Date(message.timestamp * 1000);
@@ -83,7 +80,6 @@ export const imageMessage = async (customer_id, message) => {
 };
 
 export const documentMessage = async (customer_id, message) => {
-  console.log('documentMessage')
   const incoming = message.type === 'incoming' ? true : false;
   const user_name = message.senderName;
   const created_at = new Date(message.timestamp * 1000);
@@ -115,7 +111,6 @@ export const documentMessage = async (customer_id, message) => {
 };
 
 export const audioMessage = async (customer_id, message) => {
-  console.log('audioMessage')
   const incoming = message.type === 'incoming' ? true : false;
   const user_name = message.senderName;
   const created_at = new Date(message.timestamp * 1000);
@@ -165,7 +160,6 @@ export const audioMessage = async (customer_id, message) => {
 };
 
 export const videoMessage = async (customer_id, message) => {
-  console.log('videoMessage')
   const incoming = message.type === 'incoming' ? true : false;
   const user_name = message.senderName;
   const created_at = new Date(message.timestamp * 1000);
@@ -197,7 +191,6 @@ export const videoMessage = async (customer_id, message) => {
 };
 
 export const quotedMessage = async (customer_id, message) => {
-  console.log('quotedMessage')
   const incoming = message.type === 'incoming' ? true : false;
   const text = message.extendedTextMessage.text;
   const quoted_message = message.quotedMessage.textMessage;
@@ -218,7 +211,6 @@ export const quotedMessage = async (customer_id, message) => {
 };
 
 export const extendedTextMessage = async (customer_id, message) => {
-  console.log('extendedTextMessage')
   const incoming = message.type === 'incoming' ? true : false;
   const text = message.extendedTextMessage.text;
   const user_name = message.senderName;
