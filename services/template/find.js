@@ -18,6 +18,9 @@ export default async function findTemplate(product, type, i) {
     case 'pic':
       filePath = `./templates/${product}/${type}${i}.webp`;
       break;
+    case 'coupon':
+      filePath = `./templates/${product}/${type}${i}.png`;
+      break;
     default:
       throw new Error(`Unknown type "${type}"`);
   };
